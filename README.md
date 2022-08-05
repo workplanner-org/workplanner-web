@@ -1,3 +1,3 @@
 # workplanner-web
 
-### Workplanner web server and client
+Workplanner web server and client
