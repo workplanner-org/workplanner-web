@@ -2,7 +2,7 @@
 Workplanner Application web server and client
 
 
-Software needed: Docker
+Software required: Docker
 
 ### How to Run:
 Make sure docker desktop is running and run `docker-compose up` in the root directory of the repo to start the container
