@@ -1,0 +1,32 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+
+.centerItem {
+  display: flex;
+  justify-content: center;
+}
+
+.centerItemV {
+  display: flex;
+  align-items: center;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.alignLeft {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.alignRight {
+  display: flex;
+  justify-content: flex-end;
+}
