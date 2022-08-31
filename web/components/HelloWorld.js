@@ -9,7 +9,7 @@ export default function HelloWorld() {
         });
     }
     
-    function submit() {
+    async function submit() {
         const els = document.querySelectorAll(`.${styles.input}`);
 
         const message = {
