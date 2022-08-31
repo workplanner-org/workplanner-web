@@ -11,6 +11,7 @@ export default function HelloWorld() {
     
     function submit() {
         const els = document.querySelectorAll(`.${styles.input}`);
+
         const message = {
             firstName: els[0].value,
             lastName: els[1].value,
@@ -18,7 +19,17 @@ export default function HelloWorld() {
         }
         
         // send request to API
-        console.log(message);
+        try {
+            const resp = await fetch("http://10.0.0.1:8080/employees/create", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message),
+            })
+        }catch (e) {
+            console.log(e);
+        }
 
         setTimeout(() => {
             reset();
