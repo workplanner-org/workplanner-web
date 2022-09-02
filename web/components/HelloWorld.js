@@ -20,7 +20,7 @@ export default function HelloWorld() {
         
         // send request to API
         try {
-            const resp = await fetch("http://10.0.0.1:8080/employees/create", {
+            const resp = await fetch("http://localhost:8080/employees/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
