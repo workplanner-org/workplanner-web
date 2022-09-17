@@ -9,4 +9,6 @@ services:
       - "./web/.env"
     ports: 
       - 3000:3000
+    volumes:
+      - ./web/:/usr/app/
 
