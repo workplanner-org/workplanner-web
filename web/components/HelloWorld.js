@@ -1,61 +1,52 @@
 import styles from "../styles/HelloWorld.module.css";
+import { useEffect, useState } from "react";
 
 export default function HelloWorld() {
 
-    function reset() {
-        const els = document.querySelectorAll(`.${styles.input}`);
-        els.forEach(el => {
-            el.value = '';
-        });
-    }
-    
-    async function submit() {
-        const els = document.querySelectorAll(`.${styles.input}`);
+    const [cred, setCred] = useState({});
+    const [loggedIn , setLoggedIn] = useState(false);
 
-        const message = {
-            firstName: els[0].value,
-            lastName: els[1].value,
-            email: els[2].value
-        }
-        
-        // send request to API
+    async function login() {
+        let response = null;
+
+        let password = document.getElementById("password").value;
+        let username = document.getElementById("username").value;
+
         try {
-            const resp = await fetch("http://localhost:8080/employees/create", {
+            response = await fetch("http://localhost:8080/login", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    'Authorization': 'Basic ' + window.btoa(username + ":" + password),
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(message),
+                // credentials: "include"
             })
-        }catch (e) {
+            if (response.status == 200) {
+                setCred({ username: username })
+                setLoggedIn(true);
+            }
+        }catch(e) {
             console.log(e);
         }
-
-        setTimeout(() => {
-            reset();
-        });
     }
+    
 
     return(
         <section>
-            <div className="row centerText">
-                <p className={styles.title}>Workplanner Skeleton Demo</p>
-            </div>
-            <div className="row centerItem">
-                <form className={styles.form}>
-                    <input type="text" className={styles.input} placeholder="First Name" id="firstName" />
-                    <input type="text" className={styles.input} placeholder="Last Name" id="lastName" />
-                    <input type="email" className={styles.input} placeholder="Email" id="email" />
-                    <div className="row">
-                        <div className="col-6 alignLeft">
-                            <button type="button" className={styles.btn} onClick={reset}>reset</button>
-                        </div>
-                        <div className="col-6 alignRight">
-                            <button type="button" className={styles.btn} onClick={submit}>Submit</button>
-                        </div>
-                    </div>
-                </form> 
-            </div>
+            {!loggedIn && 
+                <div>
+                    <label>username</label>
+                    <input type="text" id="username" />
+                    <label>password</label>
+                    <input type="password" id="password" />
+                    <button type="button" onClick={login}>submit</button>
+                </div>
+            }
+            {loggedIn && cred &&
+                <div>
+                    <p>You are logged in as {cred.username}</p>
+                </div>
+            }
         </section>
     );
 }
